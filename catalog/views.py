@@ -25,6 +25,7 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by=2
  #   context_object_name = 'my_book_list'   # your own name for the list as a template variable
     queryset = Book.objects.filter(title__icontains='book')[:5] # Get 5 books containing the title war
     template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/locationclass
@@ -42,3 +43,19 @@ class BookListView(generic.ListView):
 
 class BookDetailView(generic.DetailView):
          model = Book
+
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by=2
+ #   context_object_name = 'my_book_list'   # your own name for the list as a template variable
+    template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/locationclass
+
+    def get_context_data(self, **kwargs):
+            # Call the base implementation first to get the context
+            context = super(AuthorListView, self).get_context_data(**kwargs)
+            # Create any data and add it to the context
+            context['some_data'] = 'This is just some data'
+            return context
+
+class AuthorDetailView(generic.DetailView):
+         model = Author

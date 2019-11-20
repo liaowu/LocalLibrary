@@ -10,4 +10,6 @@ urlpatterns = [
 # Reused view with different urls and parameters:
 #    path('url/', views.my_reused_view, {'my_template_name': 'some_path'}, name='aurl'),
 #    path('anotherurl/', views.my_reused_view, {'my_template_name': 'another_path'}, name='anotherurl'),
+    path('authors/', views.AuthorListView.as_view(), name='authors'),
+    path('author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
         ]
